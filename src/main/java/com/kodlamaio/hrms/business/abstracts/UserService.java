@@ -11,5 +11,11 @@ public interface UserService {
 
     DataResult<List<User>> getAll();
 
+    DataResult<User> findById(int id);
+
+    DataResult<User> findByEmail(String email);
+
     Result create(User user);
+
+    Result delete(int id);
 }

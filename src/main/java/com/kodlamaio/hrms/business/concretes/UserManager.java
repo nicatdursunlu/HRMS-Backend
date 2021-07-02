@@ -9,7 +9,7 @@ import com.kodlamaio.hrms.dataAccess.abstracts.UserDao;
 import com.kodlamaio.hrms.entities.concretes.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -31,8 +31,27 @@ public class UserManager implements UserService {
     }
 
     @Override
-    public Result create( User user) {
+    public DataResult<User> findById(@PathVariable("id") int id) {
+        return new SuccessDataResult<User>
+                (this.userDao.findById(id), "User is found");
+    }
+
+    @Override
+    public DataResult<User> findByEmail(String email) {
+        return new SuccessDataResult<User>
+                (this.userDao.findByEmail(email), "User is found");
+    }
+
+
+    @Override
+    public Result create(User user) {
         this.userDao.save(user);
         return new SuccessResult("User added successfully");
+    }
+
+    @Override
+    public Result delete(int id) {
+        this.userDao.deleteById(id);
+        return new SuccessResult("User deleted successfully");
     }
 }

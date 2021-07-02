@@ -22,13 +22,28 @@ public class UsersController {
         this.userService = userService;
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/")
     public DataResult<List<User>> getAll() {
         return  this.userService.getAll();
     }
 
-    @PostMapping("/create")
+    @GetMapping("/{id}")
+    public DataResult<User> findById(@RequestParam int id) {
+        return userService.findById(id);
+    }
+
+    @GetMapping("/{email}")
+    public DataResult<User> findByEmail(@RequestParam String email) {
+        return this.userService.findByEmail(email);
+    }
+
+    @PostMapping("/")
     public ResponseEntity<?> create(@RequestBody User user) {
         return ResponseEntity.ok(this.userService.create(user));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> DeletE(@RequestParam int id) {
+        return ResponseEntity.ok(this.userService.delete(id));
     }
 }
