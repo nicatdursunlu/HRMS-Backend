@@ -50,6 +50,15 @@ public class UserManager implements UserService {
     }
 
     @Override
+    public Result update(int id, User user) {
+        User _user = this.userDao.findById(id);
+
+        this.userDao.findById(id).setEmail(user.getEmail());
+        this.userDao.findById(id).setPassword(user.getPassword());
+        return new SuccessResult("User updated successfully" + this.userDao.findById(id));
+    }
+
+    @Override
     public Result delete(int id) {
         this.userDao.deleteById(id);
         return new SuccessResult("User deleted successfully");
