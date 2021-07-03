@@ -14,20 +14,19 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "languages")
+@Table(name = "job_titles")
 @EqualsAndHashCode(callSuper = false)
-public class Language extends BaseEntity {
+public class JobTitle extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "language_id")
+    @Column(name = "job_title_id")
     private int id;
 
+    @Column(name = "title", unique = true)
     @NotBlank(message = ValidationMessages.NOT_BLANK)
-    @Column(name = "name", unique = true)
-    private String name;
+    private String title;
 
-    // relations
     @JsonIgnore
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "created_user_id", insertable = false, updatable = false)

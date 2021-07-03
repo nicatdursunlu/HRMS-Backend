@@ -59,4 +59,9 @@ public class User {
     @Length(max = 25, message = ValidationMessages.PASSWORD_MAX_LENGTH)
     @Column(name = "password")
     private String password;
+
+    @NotBlank(message = ValidationMessages.NOT_BLANK)
+    @Length(max = 25)
+    @Column(name = "phone")
+    private int phone;
 }
