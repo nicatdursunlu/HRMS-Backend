@@ -63,5 +63,5 @@ public class User {
     @NotBlank(message = ValidationMessages.NOT_BLANK)
     @Length(max = 25)
     @Column(name = "phone")
-    private int phone;
+    private String phone;
 }
