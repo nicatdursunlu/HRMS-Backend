@@ -1,12 +1,11 @@
 package com.kodlamaio.hrms.api.controllers;
 
 import com.kodlamaio.hrms.business.abstracts.EmployerVerificationService;
-import com.kodlamaio.hrms.core.utilities.results.DataResult;
 import com.kodlamaio.hrms.core.utilities.results.Result;
-import com.kodlamaio.hrms.entities.concretes.UserVerification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,10 +20,7 @@ public class EmployerVerificationsController {
         this.employerVerificationService = employerVerificationService;
     }
 
-//    public DataResult<UserVerification> generate(int userId) {
-//        return super.generate(userId);
-//    }
-
+    @GetMapping("/{code}")
     public ResponseEntity<Result> verificate(String code) {
         Result result = this.employerVerificationService.verificate(code);
 

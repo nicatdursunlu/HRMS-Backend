@@ -7,11 +7,13 @@ import com.kodlamaio.hrms.core.utilities.results.*;
 import com.kodlamaio.hrms.dataAccess.abstracts.UserVerificationDao;
 import com.kodlamaio.hrms.entities.concretes.UserVerification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
+@Service
 public class UserVerificationManager implements UserVerificationService {
 
     private UserVerificationDao userVerificationDao;
