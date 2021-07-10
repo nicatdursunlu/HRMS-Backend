@@ -9,7 +9,6 @@ import java.util.List;
 
 @NoRepositoryBean
 public interface BaseDao<T, ID extends Serializable> extends JpaRepository<T, ID> {
-
     <S extends T> DataResult<S> insert(S entity);
     <S extends T> DataResult<S> update(S entity);
     <S extends T> List<S> insertAll(Iterable<S> entities);
