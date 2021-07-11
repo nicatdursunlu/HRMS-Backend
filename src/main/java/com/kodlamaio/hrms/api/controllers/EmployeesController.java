@@ -4,6 +4,7 @@ import com.kodlamaio.hrms.business.abstracts.EmployeeService;
 import com.kodlamaio.hrms.core.utilities.results.DataResult;
 import com.kodlamaio.hrms.core.utilities.results.Result;
 import com.kodlamaio.hrms.entities.concretes.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ public class EmployeesController {
 
     private EmployeeService employeeService;
 
+    @Autowired
     public EmployeesController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
@@ -26,14 +28,19 @@ public class EmployeesController {
         return this.employeeService.getAll();
     }
 
+//    @PostMapping("")
+//    public ResponseEntity<Result> add(@Valid @RequestBody Employee employee) {
+//        Result result = this.employeeService.add(employee);
+//
+//        if(!result.isSuccess()) {
+//            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+//        }
+//
+//        return new ResponseEntity<>(result, HttpStatus.OK);
+//    }
+
     @PostMapping("")
-    public ResponseEntity<Result> add(@Valid @RequestBody Employee employee) {
-        Result result = this.employeeService.add(employee);
-
-        if(!result.isSuccess()) {
-            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
-        }
-
-        return new ResponseEntity<>(result, HttpStatus.OK);
+    public ResponseEntity<?> save(@Valid @RequestBody Employee employee) {
+        return ResponseEntity.ok(this.employeeService.add(employee));
     }
 }
