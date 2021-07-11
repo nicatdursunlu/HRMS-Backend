@@ -5,12 +5,15 @@ import com.kodlamaio.hrms.core.utilities.results.Result;
 import com.kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import com.kodlamaio.hrms.entities.concretes.City;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.Optional;
 
 public interface CityService {
 
     public DataResult<List<City>> getAll();
+
+    public DataResult<List<City>> getAll(int limit, int page);
 
     public DataResult<List<City>> getAllByName(String name);
 
