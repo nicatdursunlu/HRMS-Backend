@@ -14,12 +14,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/languages")
-public class LanguageController {
+public class LanguagesController {
 
     private LanguageService languageService;
 
     @Autowired
-    public LanguageController(LanguageService languageService) {
+    public LanguagesController(LanguageService languageService) {
         this.languageService = languageService;
     }
 
@@ -28,7 +28,7 @@ public class LanguageController {
         return this.languageService.getAll();
     }
 
-    @GetMapping("/name")
+    @GetMapping("/{name}")
     public DataResult<List<Language>> getAllByName(@RequestParam String name) {
         return this.languageService.getAllByName(name);
     }
