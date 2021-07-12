@@ -4,7 +4,10 @@ import com.kodlamaio.hrms.business.abstracts.CityService;
 import com.kodlamaio.hrms.core.utilities.results.DataResult;
 import com.kodlamaio.hrms.core.utilities.results.Result;
 import com.kodlamaio.hrms.entities.concretes.City;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +18,8 @@ import java.util.Optional;
 @CrossOrigin
 @RestController
 @RequestMapping("api/cities")
+@Api(tags = "Cities")
+//@Api(value="onlinestore", description="Operations pertaining to products in Online Store")
 public class CitiesController {
 
     private CityService cityService;
@@ -31,7 +36,14 @@ public class CitiesController {
     }
 
     @GetMapping("pages")
-    @ApiOperation(value = "Get cities by pages")
+    @ApiOperation(value = "Get cities by pages", notes = "vnruvnrvbr")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved list"),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+        }
+    )
     public DataResult<List<City>> getAll(int page, int size) {
         return this.cityService.getAll(page, size);
     }

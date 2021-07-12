@@ -2,12 +2,14 @@ package com.kodlamaio.hrms.business.concretes;
 
 import com.kodlamaio.hrms.business.abstracts.ResumeLanguageService;
 import com.kodlamaio.hrms.core.utilities.business.CheckEngine;
+import com.kodlamaio.hrms.core.utilities.mappers.ModelMapperUtils;
 import com.kodlamaio.hrms.core.utilities.results.DataResult;
 import com.kodlamaio.hrms.core.utilities.results.Result;
 import com.kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import com.kodlamaio.hrms.core.utilities.results.SuccessResult;
 import com.kodlamaio.hrms.dataAccess.abstracts.ResumeLanguageDao;
 import com.kodlamaio.hrms.entities.concretes.ResumeLanguage;
+import com.kodlamaio.hrms.entities.dtos.resumes.ResumeLanguageDetailDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +38,14 @@ public class ResumeLanguageManager implements ResumeLanguageService {
         return new SuccessDataResult<List<ResumeLanguage>>(
                 (List<ResumeLanguage>) this.resumeLanguageDao.findAllByResumeId(resumeId),
                 "Resume languages are listed successfully!");
+    }
+
+    @Override
+    public DataResult<List<ResumeLanguageDetailDto>> getAllDetailDtoByResumeId(int resumeId) {
+        return new SuccessDataResult<List<ResumeLanguageDetailDto>>(
+                ModelMapperUtils.toList(this.getAllDetailDtoByResumeId(resumeId).getData(),
+                        ResumeLanguageDetailDto.class)
+        );
     }
 
     @Override
