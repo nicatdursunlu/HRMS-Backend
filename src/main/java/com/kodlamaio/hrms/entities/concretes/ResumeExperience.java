@@ -22,7 +22,7 @@ public class ResumeExperience {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "resume_education_id")
+    @Column(name = "resume_experience_id")
     private int id;
 
     @NotNull(message = ValidationMessages.NOT_BLANK)

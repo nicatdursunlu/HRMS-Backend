@@ -32,7 +32,8 @@ public class ResumeEducationManager implements ResumeEducationService {
 //        return new SuccessDataResult<List<ResumeEducation>>(
 //                result, "vr"
 //        );
-        return new SuccessDataResult<List<ResumeEducation>>(this.resumeEducationDao.findAll(), "Vrv");
+        return new SuccessDataResult<List<ResumeEducation>>
+                (this.resumeEducationDao.findAll(), "Vrv");
     }
 
     @Override

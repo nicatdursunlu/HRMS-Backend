@@ -30,27 +30,27 @@ public class CitiesController {
         return this.cityService.getAll();
     }
 
-    @GetMapping("/pages")
+    @GetMapping("pages")
     @ApiOperation(value = "Get cities by pages")
     public DataResult<List<City>> getAll(int page, int size) {
         return this.cityService.getAll(page, size);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     @ApiOperation(value = "Get city by id")
-    public DataResult<Optional<City>> getById(@RequestParam int id) {
+    public DataResult<Optional<City>> getById(@RequestParam(name = "id") int id) {
         return this.cityService.getById(id);
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("{name}")
     @ApiOperation(value = "Get city by name")
     public DataResult<List<City>> getAllByName(@RequestParam String name) {
         return this.cityService.getAllByName(name);
     }
 
-    @GetMapping(value = "/{stateId}")
+    @GetMapping(value = "{stateId}")
     @ApiOperation(value = "Get city by state id")
-    public @ResponseBody DataResult<List<City>> getByStateId(@RequestParam int stateId) {
+    public @ResponseBody DataResult<List<City>> getByStateId(@RequestParam(name = "stateId") int stateId) {
         return this.cityService.getByStateId(stateId);
     }
 

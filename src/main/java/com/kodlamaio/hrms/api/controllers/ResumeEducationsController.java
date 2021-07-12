@@ -29,7 +29,7 @@ public class ResumeEducationsController {
         return this.resumeEducationService.getAllByResumeId(resumeId);
     }
 
-    @PostMapping("/{resumeId}")
+    @PostMapping("")
     public ResponseEntity<?> add(@Valid @RequestBody ResumeEducation resumeEducation) {
         Result result = this.resumeEducationService.add(resumeEducation);
 
