@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface ResumeEducationService {
 
+    DataResult<List<ResumeEducation>> getAll();
+
     DataResult<List<ResumeEducation>> getAllByResumeId(int resumeId);
 
     Result add(ResumeEducation resumeEducation);

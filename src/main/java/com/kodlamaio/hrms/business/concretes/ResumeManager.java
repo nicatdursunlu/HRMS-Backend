@@ -5,6 +5,7 @@ import com.kodlamaio.hrms.core.utilities.mappers.ModelMapperUtils;
 import com.kodlamaio.hrms.core.utilities.results.DataResult;
 import com.kodlamaio.hrms.core.utilities.results.Result;
 import com.kodlamaio.hrms.core.utilities.results.SuccessDataResult;
+import com.kodlamaio.hrms.core.utilities.results.SuccessResult;
 import com.kodlamaio.hrms.dataAccess.abstracts.ResumeDao;
 import com.kodlamaio.hrms.entities.concretes.Resume;
 import com.kodlamaio.hrms.entities.dtos.resumes.ResumeDetailDto;
@@ -53,6 +54,6 @@ public class ResumeManager implements ResumeService {
     @Override
     public Result add(Resume resume) {
         this.resumeDao.save(resume);
-        return new SuccessDataResult<>(resume,"Resume added successfully!");
+        return new SuccessResult("Resume added successfully!");
     }
 }

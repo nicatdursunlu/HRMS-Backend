@@ -46,10 +46,10 @@ public class ResumeLanguage {
     @Column(name = "language_id")
     private int languageId;
 
-    @Size(min = 1, max = 5, message = ValidationMessages.GRADE_MUST_BE_BETWEEN)
+//    @Size(min = 1, max = 5, message = ValidationMessages.GRADE_MUST_BE_BETWEEN)
     @NotNull(message = ValidationMessages.NOT_BLANK)
     @Column(name = "grade")
-    private BigDecimal grade;
+    private int grade;
 
     // relations
     @JsonIgnore

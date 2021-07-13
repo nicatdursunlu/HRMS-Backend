@@ -19,7 +19,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/cities")
 @Api(tags = "Cities")
-//@Api(value="onlinestore", description="Operations pertaining to products in Online Store")
 public class CitiesController {
 
     private CityService cityService;
@@ -30,13 +29,13 @@ public class CitiesController {
     }
 
     @GetMapping("")
-    @ApiOperation(value = "Get all cities")
+    @ApiOperation(value = "Get All Cities")
     public DataResult<List<City>> getAll() {
         return this.cityService.getAll();
     }
 
     @GetMapping("pages")
-    @ApiOperation(value = "Get cities by pages", notes = "vnruvnrvbr")
+    @ApiOperation(value = "Get Cities by Pages")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved list"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
@@ -49,25 +48,25 @@ public class CitiesController {
     }
 
     @GetMapping("{id}")
-    @ApiOperation(value = "Get city by id")
+    @ApiOperation(value = "Get City by Id")
     public DataResult<Optional<City>> getById(@RequestParam(name = "id") int id) {
         return this.cityService.getById(id);
     }
 
     @GetMapping("{name}")
-    @ApiOperation(value = "Get city by name")
+    @ApiOperation(value = "Get City by Name")
     public DataResult<List<City>> getAllByName(@RequestParam String name) {
         return this.cityService.getAllByName(name);
     }
 
     @GetMapping(value = "{stateId}")
-    @ApiOperation(value = "Get city by state id")
-    public @ResponseBody DataResult<List<City>> getByStateId(@RequestParam(name = "stateId") int stateId) {
+    @ApiOperation(value = "Get City by State Id")
+    public @ResponseBody DataResult<List<City>> getByStateId(@RequestParam(value = "stateId") int stateId) {
         return this.cityService.getByStateId(stateId);
     }
 
     @PostMapping("")
-    @ApiOperation(value = "Add city")
+    @ApiOperation(value = "Add City")
     public Result add(@Valid  @RequestBody City city) {
         return this.cityService.add(city);
     }

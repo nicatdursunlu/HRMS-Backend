@@ -50,7 +50,7 @@ public class CityManager implements CityService {
     public DataResult<List<City>> getByStateId(int stateId) {
         return new SuccessDataResult<List<City>>
                 (this.cityDao.getByStateId(stateId),
-                        "Cities of state" + stateId + " are listed successfully");
+                        "Cities of state " + stateId + " are listed successfully");
     }
 
     @Override

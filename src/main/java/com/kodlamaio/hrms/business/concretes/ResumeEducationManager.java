@@ -23,17 +23,19 @@ public class ResumeEducationManager implements ResumeEducationService {
     }
 
     @Override
+    public DataResult<List<ResumeEducation>> getAll() {
+        return new SuccessDataResult<List<ResumeEducation>>(
+                this.resumeEducationDao.findAll(),
+                "Resume educations are listed successfully!"
+        );
+    }
+
+    @Override
     public DataResult<List<ResumeEducation>> getAllByResumeId(int resumeId) {
-//        List<ResumeEducation> result = (List<ResumeEducation>) this.resumeEducationDao.findAllByResumeId(id);
-//        return new SuccessDataResult<List<ResumeEducation>>(
-//                this.resumeEducationDao.findAllByResumeId(resumeId),
-//                "Resume educations are listed successfully!");
-//        List<ResumeEducation> result = (List<ResumeEducation>) this.resumeEducationDao.findAllByResumeId(resumeId);
-//        return new SuccessDataResult<List<ResumeEducation>>(
-//                result, "vr"
-//        );
-        return new SuccessDataResult<List<ResumeEducation>>
-                (this.resumeEducationDao.findAll(), "Vrv");
+        List<ResumeEducation> result = (List<ResumeEducation>) this.resumeEducationDao.findAllByResumeId(resumeId);
+        return new SuccessDataResult<List<ResumeEducation>>(
+                result, "Resume educations by resume ID are listed successfully!"
+        );
     }
 
     @Override

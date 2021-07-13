@@ -4,6 +4,8 @@ import com.kodlamaio.hrms.business.abstracts.ResumeEducationService;
 import com.kodlamaio.hrms.core.utilities.results.DataResult;
 import com.kodlamaio.hrms.core.utilities.results.Result;
 import com.kodlamaio.hrms.entities.concretes.ResumeEducation;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +16,8 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("api/resume-educations")
+@RequestMapping("api/resume/educations")
+@Api(tags = "Resume Educations")
 public class ResumeEducationsController {
 
     private ResumeEducationService resumeEducationService;
@@ -24,12 +27,20 @@ public class ResumeEducationsController {
         this.resumeEducationService = resumeEducationService;
     }
 
+    @GetMapping("")
+    @ApiOperation(value = "Get All Resume Educations")
+    public DataResult<List<ResumeEducation>> getAll() {
+        return this.resumeEducationService.getAll();
+    }
+
     @GetMapping("/{resumeId}")
+    @ApiOperation(value = "Get All Resume Educations by Resume Id")
     public DataResult<List<ResumeEducation>> getAllByResumeId(int resumeId) {
         return this.resumeEducationService.getAllByResumeId(resumeId);
     }
 
     @PostMapping("")
+    @ApiOperation(value = "Add Resume Education")
     public ResponseEntity<?> add(@Valid @RequestBody ResumeEducation resumeEducation) {
         Result result = this.resumeEducationService.add(resumeEducation);
 

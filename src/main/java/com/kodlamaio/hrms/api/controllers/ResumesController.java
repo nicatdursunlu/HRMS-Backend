@@ -6,6 +6,8 @@ import com.kodlamaio.hrms.core.utilities.results.Result;
 import com.kodlamaio.hrms.entities.concretes.Resume;
 import com.kodlamaio.hrms.entities.dtos.resumes.ResumeDetailDto;
 import com.kodlamaio.hrms.entities.dtos.resumes.ResumeSummaryDto;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("api/resumes")
+@Api(tags = "Resumes")
 public class ResumesController {
 
     private ResumeService resumeService;
@@ -27,11 +30,13 @@ public class ResumesController {
     }
 
     @GetMapping("")
+    @ApiOperation(value = "Get All Resumes Summary")
     public DataResult<List<ResumeSummaryDto>> getAllSummaryDto() {
         return this.resumeService.getAllSummaryDto();
     }
 
-    @GetMapping("{id}/details")
+    @GetMapping("{id}")
+    @ApiOperation(value = "Get Resume Summary by Resume Id")
     public DataResult<List<ResumeDetailDto>> getDetailDtoById(
             @PathVariable(name = "id", required = true) int id) {
         return this.resumeService.getDetailDtoById(id);
@@ -42,6 +47,7 @@ public class ResumesController {
 //    }
 
     @PostMapping("")
+    @ApiOperation(value = "Add Resume")
     public ResponseEntity<Result> add(@Valid @RequestBody Resume resume) {
         Result result = this.resumeService.add(resume);
 
