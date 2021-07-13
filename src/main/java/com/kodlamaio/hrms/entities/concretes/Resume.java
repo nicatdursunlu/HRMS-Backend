@@ -49,13 +49,13 @@ public class Resume extends BaseEntity {
     private List<ResumeExperience> resumeExperiences;
 
     // relations
-    @JsonIgnore
     @ManyToOne(targetEntity = Candidate.class, fetch = FetchType.LAZY)
-    @Column(name = "created_user_id", insertable = false, updatable = false)
+    @JsonIgnore
+    @JoinColumn(name = "created_user_id", insertable = false, updatable = false)
     private Candidate createdUser;
 
-    @JsonIgnore
     @ManyToOne(targetEntity = Candidate.class, fetch = FetchType.LAZY)
-    @Column(name = "modified_user_id", insertable = false, updatable = false)
+    @JsonIgnore
+    @JoinColumn(name = "modified_user_id", insertable = false, updatable = false)
     private Candidate modifiedUser;
 }

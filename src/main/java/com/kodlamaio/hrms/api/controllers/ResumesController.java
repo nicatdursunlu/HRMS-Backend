@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin
@@ -41,7 +42,7 @@ public class ResumesController {
 //    }
 
     @PostMapping("")
-    public ResponseEntity<Result> add(Resume resume) {
+    public ResponseEntity<Result> add(@Valid @RequestBody Resume resume) {
         Result result = this.resumeService.add(resume);
 
         if(!result.isSuccess()) {

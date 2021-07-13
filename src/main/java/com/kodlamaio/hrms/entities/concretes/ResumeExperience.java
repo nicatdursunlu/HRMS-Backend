@@ -16,7 +16,7 @@ import java.sql.Date;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "resume_experiences")
+//@Table(name = "resume_experiences")
 @EqualsAndHashCode(callSuper = false)
 public class ResumeExperience {
 

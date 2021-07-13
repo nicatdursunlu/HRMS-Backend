@@ -1,22 +1,32 @@
 package com.kodlamaio.hrms.entities.concretes;
 
+import java.sql.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.kodlamaio.hrms.business.constants.ValidationMessages;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.sql.Date;
-
 @Data
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "resume_educations")
+@NoArgsConstructor
+@Table(name = "resume_ed")
 @EqualsAndHashCode(callSuper = false)
 public class ResumeEducation {
 
@@ -43,14 +53,14 @@ public class ResumeEducation {
 
     @NotNull(message = ValidationMessages.NOT_BLANK)
     @Column(name = "is_graduate")
-    private boolean isGraduate;
+    private boolean graduate;
 
     @Column(name = "graduate_date")
     private Date graduateDate;
 
-    // relations
-    @JsonIgnore
+    //relation mapping.
     @ManyToOne(targetEntity = Resume.class, fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name = "resume_id", insertable = false, updatable = false)
     private Resume resume;
 }
