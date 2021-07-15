@@ -16,7 +16,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @Table(name = "website_types")
 @EqualsAndHashCode(callSuper = false)
-public class WebsiteType {
+public class WebsiteType extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

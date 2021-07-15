@@ -22,7 +22,6 @@ public class WebsiteTypeManager implements WebsiteTypeService {
         this.websiteTypeDao = websiteTypeDao;
     }
 
-
     @Override
     public DataResult<List<WebsiteType>> getAll() {
         return new SuccessDataResult<List<WebsiteType>>(

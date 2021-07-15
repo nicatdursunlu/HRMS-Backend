@@ -12,8 +12,8 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "languages")
 @EqualsAndHashCode(callSuper = false)
 public class Language extends BaseEntity {
