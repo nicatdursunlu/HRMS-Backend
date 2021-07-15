@@ -1,10 +1,9 @@
 package com.kodlamaio.hrms.business.concretes;
 
 import com.kodlamaio.hrms.business.abstracts.ResumeEducationService;
-import com.kodlamaio.hrms.core.utilities.results.DataResult;
-import com.kodlamaio.hrms.core.utilities.results.Result;
-import com.kodlamaio.hrms.core.utilities.results.SuccessDataResult;
-import com.kodlamaio.hrms.core.utilities.results.SuccessResult;
+import com.kodlamaio.hrms.business.constants.ValidationMessages;
+import com.kodlamaio.hrms.core.utilities.business.CheckEngine;
+import com.kodlamaio.hrms.core.utilities.results.*;
 import com.kodlamaio.hrms.dataAccess.abstracts.ResumeEducationDao;
 import com.kodlamaio.hrms.entities.concretes.ResumeEducation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class ResumeEducationManager implements ResumeEducationService {
 
     @Override
     public DataResult<List<ResumeEducation>> getAllByResumeId(int resumeId) {
-        List<ResumeEducation> result = (List<ResumeEducation>) this.resumeEducationDao.findAllByResumeId(resumeId);
+        List<ResumeEducation> result = this.resumeEducationDao.findAllByResumeId(resumeId);
         return new SuccessDataResult<List<ResumeEducation>>(
                 result, "Resume educations by resume ID are listed successfully!"
         );
@@ -40,7 +39,20 @@ public class ResumeEducationManager implements ResumeEducationService {
 
     @Override
     public Result add(ResumeEducation resumeEducation) {
+        Result result = CheckEngine.run(checkIfIsGraduateThenGraduateDateNotNull(resumeEducation));
+
+        if(!result.isSuccess()) {
+            return new ErrorDataResult<ResumeEducation>(resumeEducation, result.getMessage());
+        }
+
         this.resumeEducationDao.save(resumeEducation);
         return new SuccessResult("Resume education added successfully!");
+    }
+
+    private Result checkIfIsGraduateThenGraduateDateNotNull(ResumeEducation resumeEducation) {
+        if(resumeEducation.isGraduate() && resumeEducation.getGraduateDate() != null) {
+            return new ErrorResult(ValidationMessages.IF_IS_GRADUATE_THEN_GRADUATE_DATE_CAN_NOT_BE_NULL);
+        }
+        return new SuccessResult();
     }
 }

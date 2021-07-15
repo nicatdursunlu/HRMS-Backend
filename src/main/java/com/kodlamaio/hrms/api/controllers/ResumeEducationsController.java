@@ -16,7 +16,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("api/resume/educations")
+@RequestMapping("api/resume")
 @Api(tags = "Resume Educations")
 public class ResumeEducationsController {
 
@@ -27,19 +27,19 @@ public class ResumeEducationsController {
         this.resumeEducationService = resumeEducationService;
     }
 
-    @GetMapping("")
+    @GetMapping("educations")
     @ApiOperation(value = "Get All Resume Educations")
     public DataResult<List<ResumeEducation>> getAll() {
         return this.resumeEducationService.getAll();
     }
 
-    @GetMapping("/{resumeId}")
+    @GetMapping("{resumeId}/educations")
     @ApiOperation(value = "Get All Resume Educations by Resume Id")
     public DataResult<List<ResumeEducation>> getAllByResumeId(int resumeId) {
         return this.resumeEducationService.getAllByResumeId(resumeId);
     }
 
-    @PostMapping("")
+    @PostMapping("educations")
     @ApiOperation(value = "Add Resume Education")
     public ResponseEntity<?> add(@Valid @RequestBody ResumeEducation resumeEducation) {
         Result result = this.resumeEducationService.add(resumeEducation);

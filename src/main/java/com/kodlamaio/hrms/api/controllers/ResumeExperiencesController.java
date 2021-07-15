@@ -4,6 +4,7 @@ import com.kodlamaio.hrms.business.abstracts.ResumeExperienceService;
 import com.kodlamaio.hrms.core.utilities.results.DataResult;
 import com.kodlamaio.hrms.core.utilities.results.Result;
 import com.kodlamaio.hrms.entities.concretes.ResumeExperience;
+import com.kodlamaio.hrms.entities.dtos.resumes.ResumeExperienceDetailDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("api/resume/experiences")
+@RequestMapping("api/resume")
 @Api(tags = "Resume Experiences")
 public class ResumeExperiencesController {
 
@@ -27,19 +28,19 @@ public class ResumeExperiencesController {
         this.resumeExperienceService = resumeExperienceService;
     }
 
-    @GetMapping("")
+    @GetMapping("experiences")
     @ApiOperation(value = "Get All Resume Experiences")
     public DataResult<List<ResumeExperience>> getAll() {
         return this.resumeExperienceService.getAll();
     }
 
-    @GetMapping("{resumeId}")
+    @GetMapping("{resumeId}/experiences")
     @ApiOperation(value = "Get All Resume Experiences by Resume Id")
-    public DataResult<List<ResumeExperience>> getAllByResumeId(int resumeId) {
-        return this.resumeExperienceService.getAllByResumeId(resumeId);
+    public DataResult<List<ResumeExperienceDetailDto>> getAllByResumeId(@PathVariable("resumeId") int resumeId) {
+        return this.resumeExperienceService.getAllDetailDtoByResumeId(resumeId);
     }
 
-    @PostMapping("")
+    @PostMapping("experiences")
     @ApiOperation(value = "Add Resume Experience")
     public ResponseEntity<Result> add(@Valid @RequestBody ResumeExperience resumeExperience) {
         Result result = this.resumeExperienceService.add(resumeExperience);

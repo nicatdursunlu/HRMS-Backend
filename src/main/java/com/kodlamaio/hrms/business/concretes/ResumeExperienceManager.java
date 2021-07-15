@@ -3,9 +3,12 @@ package com.kodlamaio.hrms.business.concretes;
 import com.kodlamaio.hrms.business.abstracts.ResumeExperienceService;
 import com.kodlamaio.hrms.business.constants.ValidationMessages;
 import com.kodlamaio.hrms.core.utilities.business.CheckEngine;
+import com.kodlamaio.hrms.core.utilities.mappers.ModelMapperUtils;
 import com.kodlamaio.hrms.core.utilities.results.*;
 import com.kodlamaio.hrms.dataAccess.abstracts.ResumeExperienceDao;
 import com.kodlamaio.hrms.entities.concretes.ResumeExperience;
+import com.kodlamaio.hrms.entities.dtos.resumes.ResumeExperienceDetailDto;
+import com.kodlamaio.hrms.entities.dtos.resumes.ResumeLanguageDetailDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,8 +34,18 @@ public class ResumeExperienceManager implements ResumeExperienceService {
     @Override
     public DataResult<List<ResumeExperience>> getAllByResumeId(int id) {
         return new SuccessDataResult<List<ResumeExperience>>(
-                (List<ResumeExperience>) this.resumeExperienceDao.findAllByResumeId(id),
+                this.resumeExperienceDao.findAllByResumeId(id),
                 "Resume experiences are listed successfully!"
+        );
+    }
+
+    @Override
+    public DataResult<List<ResumeExperienceDetailDto>> getAllDetailDtoByResumeId(int resumeId) {
+        return new SuccessDataResult<List<ResumeExperienceDetailDto>>(
+                ModelMapperUtils.toList(
+                        this.getAllByResumeId(resumeId).getData(),
+                        ResumeExperienceDetailDto.class
+                )
         );
     }
 

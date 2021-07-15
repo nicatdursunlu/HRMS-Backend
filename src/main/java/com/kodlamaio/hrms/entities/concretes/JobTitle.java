@@ -1,6 +1,7 @@
 package com.kodlamaio.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kodlamaio.hrms.business.constants.ValidationMessages;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +22,8 @@ public class JobTitle extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "job_title_id")
-    private int id;
+    @JsonProperty("id")
+    private int jobTitleId;
 
     @Column(name = "title", unique = true)
     @NotBlank(message = ValidationMessages.NOT_BLANK)
