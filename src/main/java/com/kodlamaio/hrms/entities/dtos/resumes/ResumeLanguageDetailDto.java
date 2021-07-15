@@ -19,6 +19,6 @@ public class ResumeLanguageDetailDto {
     private int languageId;
 
     private Instant createdDate;
-    private String language;
+    private String languageName;
     private BigDecimal grade;
 }

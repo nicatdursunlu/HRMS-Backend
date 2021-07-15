@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface CityDao extends JpaRepository<City, Integer> {
     List<City> findFirst10ByNameContainingIgnoreCase(@Param("name") String name);
 
-    List<City> getByStateId(int stateId);
+    List<City> getByStateId(@Param("stateId") int stateId);
 
-    Optional<City> findById(int id);
+    Optional<City> findById(@Param("id") int id);
 }

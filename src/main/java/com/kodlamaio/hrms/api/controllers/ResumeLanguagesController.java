@@ -1,10 +1,8 @@
 package com.kodlamaio.hrms.api.controllers;
 
-import com.kodlamaio.hrms.business.abstracts.ResumeExperienceService;
 import com.kodlamaio.hrms.business.abstracts.ResumeLanguageService;
 import com.kodlamaio.hrms.core.utilities.results.DataResult;
 import com.kodlamaio.hrms.core.utilities.results.Result;
-import com.kodlamaio.hrms.entities.concretes.ResumeExperience;
 import com.kodlamaio.hrms.entities.concretes.ResumeLanguage;
 import com.kodlamaio.hrms.entities.dtos.resumes.ResumeLanguageDetailDto;
 import io.swagger.annotations.Api;
@@ -19,7 +17,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("api/resume/languages")
+@RequestMapping("api/resume")
 @Api(tags = "Resume Languages")
 public class ResumeLanguagesController {
 
@@ -30,24 +28,19 @@ public class ResumeLanguagesController {
         this.resumeLanguageService = resumeLanguageService;
     }
 
-    @GetMapping("")
+    @GetMapping("languages")
     @ApiOperation(value = "Get All Resume Languages")
     public DataResult<List<ResumeLanguage>> getAll() {
         return this.resumeLanguageService.getAll();
     }
 
-    @GetMapping("{resumeId}")
+    @GetMapping("{resumeId}/languages")
     @ApiOperation(value = "Get All Resume Languages by Resume Id")
-    public DataResult<List<ResumeLanguage>> getAllByResumeId(int resumeId) {
-        return this.resumeLanguageService.getAllByResumeId(resumeId);
-    }
-
-    @GetMapping("detailed/{resumeId}")
-    public DataResult<List<ResumeLanguageDetailDto>> getAllDetailDtoByResumeId(int resumeId) {
+    public DataResult<List<ResumeLanguageDetailDto>> getAllByResumeId(@PathVariable("resumeId")  int resumeId) {
         return this.resumeLanguageService.getAllDetailDtoByResumeId(resumeId);
     }
 
-    @PostMapping("")
+    @PostMapping("languages")
     @ApiOperation(value = "Add Resume Language")
     public ResponseEntity<Result> add(@Valid @RequestBody ResumeLanguage resumeLanguage) {
         Result result = this.resumeLanguageService.add(resumeLanguage);

@@ -1,7 +1,6 @@
 package com.kodlamaio.hrms.business.concretes;
 
 import com.kodlamaio.hrms.business.abstracts.ResumeLanguageService;
-import com.kodlamaio.hrms.core.utilities.business.CheckEngine;
 import com.kodlamaio.hrms.core.utilities.mappers.ModelMapperUtils;
 import com.kodlamaio.hrms.core.utilities.results.DataResult;
 import com.kodlamaio.hrms.core.utilities.results.Result;
@@ -36,16 +35,16 @@ public class ResumeLanguageManager implements ResumeLanguageService {
     @Override
     public DataResult<List<ResumeLanguage>> getAllByResumeId(int resumeId) {
         return new SuccessDataResult<List<ResumeLanguage>>(
-                (List<ResumeLanguage>) this.resumeLanguageDao.findAllByResumeId(resumeId),
+                this.resumeLanguageDao.findAllByResumeId(resumeId),
                 "Resume languages are listed successfully!");
     }
 
     @Override
     public DataResult<List<ResumeLanguageDetailDto>> getAllDetailDtoByResumeId(int resumeId) {
         return new SuccessDataResult<List<ResumeLanguageDetailDto>>(
-                ModelMapperUtils.toList(this.getAllDetailDtoByResumeId(resumeId).getData(),
-                        ResumeLanguageDetailDto.class)
-        );
+                ModelMapperUtils.toList(
+                        this.getAllByResumeId(resumeId).getData(),
+                        ResumeLanguageDetailDto.class));
     }
 
     @Override

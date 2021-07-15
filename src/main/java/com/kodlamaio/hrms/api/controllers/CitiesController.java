@@ -47,21 +47,21 @@ public class CitiesController {
         return this.cityService.getAll(page, size);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("id/{id}")
     @ApiOperation(value = "Get City by Id")
-    public DataResult<Optional<City>> getById(@RequestParam(name = "id") int id) {
+    public DataResult<Optional<City>> getById(@PathVariable("id") int id) {
         return this.cityService.getById(id);
     }
 
-    @GetMapping("{name}")
+    @GetMapping("name/{name}")
     @ApiOperation(value = "Get City by Name")
-    public DataResult<List<City>> getAllByName(@RequestParam String name) {
+    public DataResult<List<City>> getAllByName(@PathVariable("name") String name) {
         return this.cityService.getAllByName(name);
     }
 
-    @GetMapping(value = "{stateId}")
+    @GetMapping("state/{stateId}")
     @ApiOperation(value = "Get City by State Id")
-    public @ResponseBody DataResult<List<City>> getByStateId(@RequestParam(value = "stateId") int stateId) {
+    public @ResponseBody DataResult<List<City>> getByStateId(@PathVariable("stateId") int stateId) {
         return this.cityService.getByStateId(stateId);
     }
 
