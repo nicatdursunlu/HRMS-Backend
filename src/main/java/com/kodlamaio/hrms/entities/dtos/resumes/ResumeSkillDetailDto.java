@@ -5,20 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResumeLanguageDetailDto {
+public class ResumeSkillDetailDto {
 
     private int id;
 
-    @JsonProperty("languageId")
-    private int languageId;
+    @JsonProperty("skillId")
+    private int skillId;
 
     private Instant createdDate;
-    private String languageName;
+    private String name;
     private String level;
 }

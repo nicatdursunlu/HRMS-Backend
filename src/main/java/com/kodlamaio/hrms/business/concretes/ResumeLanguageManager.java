@@ -36,7 +36,7 @@ public class ResumeLanguageManager implements ResumeLanguageService {
     public DataResult<List<ResumeLanguage>> getAllByResumeId(int resumeId) {
         return new SuccessDataResult<List<ResumeLanguage>>(
                 this.resumeLanguageDao.findAllByResumeId(resumeId),
-                "Resume languages are listed successfully!");
+                "Resume languages by resume id are listed successfully!");
     }
 
     @Override

@@ -14,18 +14,21 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 public class ResumeDetailDto extends ResumeSummaryDto {
 
-    @JsonProperty("qualifications")
-    public List<ResumeQualificationDetailDto> resumeQualifications;
-
-    @JsonProperty("websites")
-    public List<ResumeWebsiteDetailDto> resumeWebsites;
-
-    @JsonProperty("languages")
-    public List<ResumeLanguageDetailDto> resumeLanguages;
-
     @JsonProperty("educations")
     public List<ResumeEducationDetailDto> resumeEducations;
 
     @JsonProperty("experiences")
     public List<ResumeExperienceDetailDto> resumeExperiences;
+
+    @JsonProperty("skills")
+    public List<ResumeSkillDetailDto> resumeSkills;
+
+    @JsonProperty("qualifications")
+    public List<ResumeQualificationDetailDto> resumeQualifications;
+
+    @JsonProperty("languages")
+    public List<ResumeLanguageDetailDto> resumeLanguages;
+
+    @JsonProperty("websites")
+    public List<ResumeWebsiteDetailDto> resumeWebsites;
 }
