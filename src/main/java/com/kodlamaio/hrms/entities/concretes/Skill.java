@@ -29,10 +29,6 @@ public class Skill extends BaseEntity {
     @NotBlank(message = ValidationMessages.NOT_BLANK)
     private String name;
 
-//    @Column(name = "level")
-//    @NotBlank(message = ValidationMessages.NOT_BLANK)
-//    private String level;
-
     // relations
     @JsonIgnore
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)

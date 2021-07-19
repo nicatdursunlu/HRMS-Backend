@@ -18,6 +18,6 @@ public class ResumeSkillDetailDto {
     private int skillId;
 
     private Instant createdDate;
-    private String name;
+    private String skillName;
     private String level;
 }

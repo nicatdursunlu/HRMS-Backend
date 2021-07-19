@@ -29,7 +29,7 @@ public class ResumeSkillsController {
     }
 
     @GetMapping("skills")
-    @ApiOperation(value = "Get All Resume Skills by Resume Id")
+    @ApiOperation(value = "Get All Resume Skills")
     public DataResult<List<ResumeSkill>> getAll() {
         return this.resumeSkillService.getAll();
     }
