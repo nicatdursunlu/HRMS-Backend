@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/jobs")
+@RequestMapping("api/jobs/types")
 @Api(tags = "Job Titles")
 public class JobTitlesController {
 

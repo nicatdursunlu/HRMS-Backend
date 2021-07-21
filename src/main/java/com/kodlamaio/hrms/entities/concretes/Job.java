@@ -69,6 +69,11 @@ public class Job extends BaseEntity {
     private State state;
 
     @JsonIgnore
+    @ManyToOne(targetEntity = JobTitle.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "job_title_id", insertable = false, updatable = false)
+    private JobTitle jobTitle;
+
+    @JsonIgnore
     @ManyToOne(targetEntity = Employer.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "created_user_id", insertable = false, updatable = false)
     private Employer createdUser;
