@@ -13,8 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "api/jobs")
@@ -34,10 +35,30 @@ public class JobsController {
         return this.jobService.getAll();
     }
 
+//    @GetMapping("{id}")
+//    @ApiOperation(value = "Get All Jobs")
+//    public DataResult<Optional<JobSummaryDto>> getJobSummaryDtoById(@RequestParam("id") int id){
+//        return this.jobService.getJobSummaryDtoById(id);
+//    }
+
     @GetMapping("summary")
     @ApiOperation(value = "Get All Jobs Summary")
     public DataResult<List<JobSummaryDto>> getAllJobSummaryDto() {
         return this.jobService.getAllJobSummaryDto();
+    }
+
+    @GetMapping("salary")
+    @ApiOperation(value = "Get All Jobs by Salary")
+    public DataResult<List<JobSummaryDto>> getAllJobSummaryDtoBySalary(
+            BigDecimal minSalary, BigDecimal maxSalary) {
+        return this.jobService.getAllJobSummaryDtoBySalary(minSalary, maxSalary);
+    }
+
+    @GetMapping("{state}")
+    @ApiOperation(value = "Get All Jobs by State")
+    public DataResult<List<JobSummaryDto>> getAllJobSummaryDtoByState(
+            @RequestParam("state") String state) {
+        return this.jobService.getAllJobSummaryDtoByState(state);
     }
 
     @GetMapping("{companyName}")

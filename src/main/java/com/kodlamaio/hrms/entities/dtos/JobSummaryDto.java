@@ -14,14 +14,21 @@ import java.util.Date;
 public class JobSummaryDto {
     private int id;
     private String companyName;
+    private String email;
+    private String phone;
+    private String website;
+    private String linkedin;
+
+    private String state;
+
     private String jobTitle;
     private BigDecimal applicantQuota;
     private Instant createdDate;
     private Date lastApplicationDate;
 
-//    private String state;
-//    private String title;
-//    private String description;
-//    private BigDecimal maxSalary;
-//    private BigDecimal minSalary;
+    private String title;
+    private String description;
+    private BigDecimal maxSalary;
+    private BigDecimal minSalary;
+
 }
