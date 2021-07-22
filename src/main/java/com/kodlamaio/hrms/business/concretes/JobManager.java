@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JobManager implements JobService {
@@ -54,7 +56,7 @@ public class JobManager implements JobService {
 
     @Override
     public DataResult<List<JobSummaryDto>> getAllJobSummaryDtoBySalary(
-            BigDecimal maxSalary, BigDecimal minSalary) {
+            BigDecimal minSalary, BigDecimal maxSalary) {
         return new SuccessDataResult<List<JobSummaryDto>>(
                 this.jobDao.getAllJobSummaryDtoBySalary(minSalary, maxSalary),
                 "Jobs are listed by salary successfully!"
@@ -69,12 +71,12 @@ public class JobManager implements JobService {
         );
     }
 
-//    @Override
-//    public DataResult<Optional<JobSummaryDto>> getJobSummaryDtoById(int id){
-//        return new SuccessDataResult<Optional<JobSummaryDto>>(
-//                this.jobDao.getJobSummaryDtoById(id), "Job by Id is found successfully!"
-//        );
-//    }
+    @Override
+    public DataResult<Optional<JobSummaryDto>> getJobSummaryDtoById(int id){
+        return new SuccessDataResult<Optional<JobSummaryDto>>(
+                this.jobDao.getJobSummaryDtoById(id), "Job by Id is found successfully!"
+        );
+    }
 
     @Override
     public DataResult<List<JobSummaryDto>> getAllJobSummaryDtoByCompanyName(String companyName) {
@@ -99,6 +101,36 @@ public class JobManager implements JobService {
     }
 
     @Override
+    public DataResult<Job> update(int id, Job job) {
+        Job oldJob = this.jobDao.findById(id).orElse(null);
+
+        if (oldJob == null) {
+            return new ErrorDataResult<>(ValidationMessages.JOB_IS_NOT_FOUND);
+        }
+
+        BigDecimal applicantQuota = job.getApplicantQuota();
+        String description = job.getDescription();
+        int jobTitleId = job.getJobTitleId();
+        int stateId = job.getStateId();
+        Date lastApplicationDate = job.getLastApplicationDate();
+        BigDecimal maxSalary = job.getMaxSalary();
+        BigDecimal minSalary = job.getMinSalary();
+        String title = job.getTitle();
+
+        oldJob.setApplicantQuota(applicantQuota);
+        oldJob.setDescription(description);
+        oldJob.setJobTitleId(jobTitleId);
+        oldJob.setStateId(stateId);
+        oldJob.setLastApplicationDate(lastApplicationDate);
+        oldJob.setMaxSalary(maxSalary);
+        oldJob.setMinSalary(minSalary);
+        oldJob.setTitle(title);
+
+        this.jobDao.save(oldJob);
+        return new SuccessDataResult<Job>(oldJob, "Job updated");
+    }
+
+    @Override
     public DataResult<Job> setStatus(int id, boolean status) {
         Job job = this.jobDao.findById(id).orElse(null);
 
@@ -110,5 +142,11 @@ public class JobManager implements JobService {
         this.jobDao.save(job);
 
         return new SuccessDataResult<Job>(job, "Job's status changed");
+    }
+
+    @Override
+    public Result delete(int id) {
+        this.jobDao.deleteById(id);
+        return new SuccessResult("Job deleted");
     }
 }

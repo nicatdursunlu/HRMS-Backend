@@ -15,8 +15,8 @@ public interface JobDao extends JpaRepository<Job, Integer> {
     @Query(Query_JobSummaryDto)
     List<JobSummaryDto> getAllJobSummaryDto();
 
-//    @Query(Query_JobSummaryDtoById)
-//    Optional<JobSummaryDto> getJobSummaryDtoById(@Param("id") int id);
+    @Query(Query_JobSummaryDtoById)
+    Optional<JobSummaryDto> getJobSummaryDtoById(@Param("id") int id);
 
     @Query(Query_ActiveJobSummaryDto)
     List<JobSummaryDto> getAllActiveJobSummaryDto();
@@ -26,7 +26,8 @@ public interface JobDao extends JpaRepository<Job, Integer> {
 
     @Query(Query_JobSummaryDto)
     List<JobSummaryDto> getAllJobSummaryDtoBySalary(
-            @Param("maxSalary") BigDecimal maxSalary, @Param("minSalary") BigDecimal minSalary);
+            @Param("minSalary") BigDecimal minSalary,
+            @Param("maxSalary") BigDecimal maxSalary);
 
     @Query(Query_JobSummaryDtoByState)
     List<JobSummaryDto> getAllJobSummaryDtoByState(@Param("state") String state);
@@ -61,6 +62,9 @@ public interface JobDao extends JpaRepository<Job, Integer> {
             +   "JOIN j.state s "
             + 	"WHERE j.lastApplicationDate >= CURRENT_DATE ";
 
+    String Query_JobSummaryDtoById = Query_JobSummaryDto
+            + "AND j.id = :id";
+
     String Query_ActiveJobSummaryDto = Query_JobSummaryDto
             + "AND j.active = true";
 
@@ -68,7 +72,7 @@ public interface JobDao extends JpaRepository<Job, Integer> {
             + "AND j.active = false";
 
     String Query_JobSummaryDtoBySalary = Query_JobSummaryDto
-            +  "AND j.minSalary=:minSalary";
+            +  "AND j.maxSalary = :maxSalary";
 
     String Query_JobSummaryDtoByState = Query_JobSummaryDto
             + "AND lower(s.name) like CONCAT('%',lower(:state),'%')";

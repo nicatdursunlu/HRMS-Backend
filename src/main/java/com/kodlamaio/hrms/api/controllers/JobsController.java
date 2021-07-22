@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "api/jobs")
@@ -34,11 +35,11 @@ public class JobsController {
         return this.jobService.getAll();
     }
 
-//    @GetMapping("{id}")
-//    @ApiOperation(value = "Get All Jobs")
-//    public DataResult<Optional<JobSummaryDto>> getJobSummaryDtoById(@RequestParam("id") int id){
-//        return this.jobService.getJobSummaryDtoById(id);
-//    }
+    @GetMapping("{id}")
+    @ApiOperation(value = "Get Job Summary by Id")
+    public DataResult<Optional<JobSummaryDto>> getJobSummaryDtoById(@RequestParam("id") int id){
+        return this.jobService.getJobSummaryDtoById(id);
+    }
 
     @GetMapping("active")
     @ApiOperation(value = "Get All Active Jobs Summary")
@@ -61,8 +62,8 @@ public class JobsController {
     @GetMapping("salary")
     @ApiOperation(value = "Get All Jobs by Salary")
     public DataResult<List<JobSummaryDto>> getAllJobSummaryDtoBySalary(
-            @RequestParam("maxSalary") BigDecimal maxSalary,
-            @RequestParam("minSalary") BigDecimal minSalary) {
+            @RequestParam("minSalary") BigDecimal minSalary,
+            @RequestParam("maxSalary") BigDecimal maxSalary) {
         return this.jobService.getAllJobSummaryDtoBySalary(minSalary, maxSalary);
     }
 
@@ -99,14 +100,20 @@ public class JobsController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @PostMapping("{id}/activate")
-    @ApiOperation(value = "Activate Job")
+    @PutMapping("{id}")
+    @ApiOperation(value = "Update Job")
+    public DataResult<Job> update(@PathVariable("id") int id, @Valid @RequestBody Job job) {
+        return this.jobService.update(id, job);
+    }
+
+    @PutMapping("{id}/activate")
+    @ApiOperation(value = "Activate Job by Id")
     private ResponseEntity<DataResult<Job>> setActivate(@PathVariable("id") int id) {
         return this.setStatus(id, true);
     }
 
-    @PostMapping("{id}/deactivate")
-    @ApiOperation(value = "Deactivate Job")
+    @PutMapping("{id}/deactivate")
+    @ApiOperation(value = "Deactivate Job by Id")
     private ResponseEntity<DataResult<Job>> setDeactivate(@PathVariable("id") int id) {
         return this.setStatus(id, false);
     }
@@ -119,5 +126,11 @@ public class JobsController {
         }
 
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
+    @ApiOperation(value = "Delete Job by Id")
+    public Result delete(@PathVariable("id") int id) {
+        return this.jobService.delete(id);
     }
 }
