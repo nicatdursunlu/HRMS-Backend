@@ -1,10 +1,8 @@
 package com.kodlamaio.hrms.business.concretes;
 
 import com.kodlamaio.hrms.business.abstracts.JobService;
-import com.kodlamaio.hrms.core.utilities.results.DataResult;
-import com.kodlamaio.hrms.core.utilities.results.Result;
-import com.kodlamaio.hrms.core.utilities.results.SuccessDataResult;
-import com.kodlamaio.hrms.core.utilities.results.SuccessResult;
+import com.kodlamaio.hrms.business.constants.ValidationMessages;
+import com.kodlamaio.hrms.core.utilities.results.*;
 import com.kodlamaio.hrms.dataAccess.abstracts.JobDao;
 import com.kodlamaio.hrms.entities.concretes.Job;
 import com.kodlamaio.hrms.entities.dtos.JobSummaryDto;
@@ -39,8 +37,24 @@ public class JobManager implements JobService {
     }
 
     @Override
+    public DataResult<List<JobSummaryDto>> getAllActiveJobSummaryDto() {
+        return new SuccessDataResult<List<JobSummaryDto>>(
+                this.jobDao.getAllActiveJobSummaryDto(),
+                "Active Job details are listed successfully!"
+        );
+    }
+
+    @Override
+    public DataResult<List<JobSummaryDto>> getAllDeactiveJobSummaryDto() {
+        return new SuccessDataResult<List<JobSummaryDto>>(
+                this.jobDao.getAllDeactiveJobSummaryDto(),
+                "Deactive Job details are listed successfully!"
+        );
+    }
+
+    @Override
     public DataResult<List<JobSummaryDto>> getAllJobSummaryDtoBySalary(
-            BigDecimal minSalary, BigDecimal maxSalary) {
+            BigDecimal maxSalary, BigDecimal minSalary) {
         return new SuccessDataResult<List<JobSummaryDto>>(
                 this.jobDao.getAllJobSummaryDtoBySalary(minSalary, maxSalary),
                 "Jobs are listed by salary successfully!"
@@ -82,5 +96,19 @@ public class JobManager implements JobService {
     public Result add(Job job) {
         this.jobDao.save(job);
         return new SuccessResult("Jobs added successfully!");
+    }
+
+    @Override
+    public DataResult<Job> setStatus(int id, boolean status) {
+        Job job = this.jobDao.findById(id).orElse(null);
+
+        if (job == null) {
+            return new ErrorDataResult<>(ValidationMessages.JOB_IS_NOT_FOUND);
+        }
+
+        job.setActive(status);
+        this.jobDao.save(job);
+
+        return new SuccessDataResult<Job>(job, "Job's status changed");
     }
 }

@@ -18,9 +18,15 @@ public interface JobDao extends JpaRepository<Job, Integer> {
 //    @Query(Query_JobSummaryDtoById)
 //    Optional<JobSummaryDto> getJobSummaryDtoById(@Param("id") int id);
 
-    @Query(Query_JobSummaryDtoBySalary)
+    @Query(Query_ActiveJobSummaryDto)
+    List<JobSummaryDto> getAllActiveJobSummaryDto();
+
+    @Query(Query_DeactiveJobSummaryDto)
+    List<JobSummaryDto> getAllDeactiveJobSummaryDto();
+
+    @Query(Query_JobSummaryDto)
     List<JobSummaryDto> getAllJobSummaryDtoBySalary(
-            @Param("minSalary") BigDecimal minSalary,  @Param("maxSalary") BigDecimal maxSalary);
+            @Param("maxSalary") BigDecimal maxSalary, @Param("minSalary") BigDecimal minSalary);
 
     @Query(Query_JobSummaryDtoByState)
     List<JobSummaryDto> getAllJobSummaryDtoByState(@Param("state") String state);
@@ -46,40 +52,23 @@ public interface JobDao extends JpaRepository<Job, Integer> {
             +   "j.title as title, "
             +   "j.description as description, "
             +   "j.maxSalary as maxSalary, "
-            +   "j.minSalary as minSalary)"
+            +   "j.minSalary as minSalary, "
+            +   "j.active as active)"
 
             + 	"FROM Job j "
             + 	"JOIN j.jobTitle jt "
             + 	"JOIN j.createdUser u "
             +   "JOIN j.state s "
-            + 	"WHERE j.active = true "
-            + 	"AND j.lastApplicationDate >= CURRENT_DATE ";
+            + 	"WHERE j.lastApplicationDate >= CURRENT_DATE ";
 
-    String Query_JobSummaryDtoBySalary =
-             "SELECT new com.kodlamaio.hrms.entities.dtos.JobSummaryDto "
-                     + 	"(j.id as id, "
-                     + 	"u.companyName as companyName, "
-                     + 	"u.email as email, "
-                     + 	"u.phone as phone, "
-                     + 	"u.website as website, "
-                     + 	"u.linkedin as linkedin, "
-                     +   "s.name as name, "
-                     + 	"jt.title as jobTitle, "
-                     +	"j.applicantQuota as applicantQuota, "
-                     + 	"j.createdDate as createdDate, "
-                     +	"j.lastApplicationDate as lastApplicationDate, "
-                     +   "j.title as title, "
-                     +   "j.description as description, "
-                     +   "j.maxSalary as maxSalary, "
-                     +   "j.minSalary as minSalary)"
+    String Query_ActiveJobSummaryDto = Query_JobSummaryDto
+            + "AND j.active = true";
 
-                     + 	"FROM Job j "
-                     + 	"JOIN j.jobTitle jt "
-                     + 	"JOIN j.createdUser u "
-                     +  "JOIN j.state s "
-                     + 	"WHERE j.active = true "
-                     + 	"AND j.lastApplicationDate >= CURRENT_DATE "
-                     +  "AND j.minSalary=:minSalary ";
+    String Query_DeactiveJobSummaryDto = Query_JobSummaryDto
+            + "AND j.active = false";
+
+    String Query_JobSummaryDtoBySalary = Query_JobSummaryDto
+            +  "AND j.minSalary=:minSalary";
 
     String Query_JobSummaryDtoByState = Query_JobSummaryDto
             + "AND lower(s.name) like CONCAT('%',lower(:state),'%')";

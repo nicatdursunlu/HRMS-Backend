@@ -31,4 +31,5 @@ public class JobSummaryDto {
     private BigDecimal maxSalary;
     private BigDecimal minSalary;
 
+    private boolean active;
 }

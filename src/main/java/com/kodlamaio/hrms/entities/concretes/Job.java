@@ -64,7 +64,6 @@ public class Job extends BaseEntity {
     @Column(name = "last_application_date")
     private Date lastApplicationDate;
 
-
     // relations.
     @ManyToOne(targetEntity = State.class, fetch = FetchType.LAZY)
     @JsonIgnore

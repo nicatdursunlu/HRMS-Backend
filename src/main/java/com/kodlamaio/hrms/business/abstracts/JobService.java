@@ -17,7 +17,11 @@ public interface JobService {
 
 //    DataResult<Optional<JobSummaryDto>> getJobSummaryDtoById(int id);
 
-    DataResult<List<JobSummaryDto>> getAllJobSummaryDtoBySalary(BigDecimal minSalary, BigDecimal maxSalary);
+    DataResult<List<JobSummaryDto>> getAllActiveJobSummaryDto();
+
+    DataResult<List<JobSummaryDto>> getAllDeactiveJobSummaryDto();
+
+    DataResult<List<JobSummaryDto>> getAllJobSummaryDtoBySalary(BigDecimal maxSalary, BigDecimal minSalary);
 
     DataResult<List<JobSummaryDto>> getAllJobSummaryDtoByState(String state);
 
@@ -26,4 +30,6 @@ public interface JobService {
     DataResult<List<JobSummaryDto>> getAllJobSummaryDtoByJobTitle(String jobTitle);
 
     Result add(Job job);
+
+    DataResult<Job> setStatus(int id, boolean status);
 }
