@@ -11,6 +11,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @Entity
@@ -18,6 +20,11 @@ import java.time.Instant;
 @NoArgsConstructor
 @Table(name = "user_verifications")
 public class UserVerification {
+
+    UserVerification(int id, String code) {
+        this.id = id;
+        this.code = code;
+    }
 
     @Id
     @Column(name = "user_verification_id")
