@@ -21,7 +21,7 @@ import java.util.Date;
 @Table(name = "user_verifications")
 public class UserVerification {
 
-    UserVerification(int id, String code) {
+    public UserVerification(int id, String code) {
         this.id = id;
         this.code = code;
     }

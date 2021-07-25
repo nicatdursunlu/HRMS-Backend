@@ -15,8 +15,6 @@ import com.kodlamaio.hrms.entities.concretes.UserVerification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 @Service
 public class AuthManager implements AuthService {
 
@@ -48,7 +46,7 @@ public class AuthManager implements AuthService {
     @Override
     public Result employerRegister(Employer employer, String confirmPassword) {
         Result result = CheckEngine.run(
-                checkIfNullInfoForEmployer(employer),
+                checkIfEqualEmailAndDomain(employer.getEmail(), employer.getWebsite()),
                 checkIfEmailExists(employer.getEmail()),
                 checkIfEqualPasswordAndConfirmPassword(employer.getPassword(), confirmPassword));
 
