@@ -70,4 +70,17 @@ public class CitiesController {
     public Result add(@Valid  @RequestBody City city) {
         return this.cityService.add(city);
     }
+
+    @PutMapping("{id}")
+    @ApiOperation(value = "Update City by Id")
+    public DataResult<Optional<City>> update(
+            @PathVariable("id") int id, @Valid @RequestBody City city) {
+        return this.cityService.update(id, city);
+    }
+
+    @DeleteMapping("{id}")
+    @ApiOperation(value = "Delete City by Id")
+    public Result delete(int id) {
+        return this.cityService.delete(id);
+    }
 }

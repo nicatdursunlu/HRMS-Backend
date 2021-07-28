@@ -20,4 +20,8 @@ public interface CityService {
     public DataResult<Optional<City>> getById(int id);
 
     public Result add(City city);
+
+    public DataResult<Optional<City>> update(int id, City city);
+
+    public Result delete(int id);
 }

@@ -1,10 +1,7 @@
 package com.kodlamaio.hrms.business.concretes;
 
 import com.kodlamaio.hrms.business.abstracts.CityService;
-import com.kodlamaio.hrms.core.utilities.results.DataResult;
-import com.kodlamaio.hrms.core.utilities.results.Result;
-import com.kodlamaio.hrms.core.utilities.results.SuccessDataResult;
-import com.kodlamaio.hrms.core.utilities.results.SuccessResult;
+import com.kodlamaio.hrms.core.utilities.results.*;
 import com.kodlamaio.hrms.dataAccess.abstracts.CityDao;
 import com.kodlamaio.hrms.entities.concretes.City;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,5 +60,27 @@ public class CityManager implements CityService {
     public Result add(City city) {
         this.cityDao.save(city);
         return new SuccessResult("City added successfully!");
+    }
+
+    @Override
+    public DataResult<Optional<City>> update(int id, City city) {
+        City oldCity = this.cityDao.findById(id).orElse(null);
+
+        if (oldCity == null) {
+            return new ErrorDataResult<>("City is not found");
+        }
+
+        oldCity.setStateId(city.getStateId());
+        oldCity.setName(city.getName());
+        this.cityDao.save(oldCity);
+        return new SuccessDataResult<Optional<City>>(
+                this.cityDao.findById(id), "City updated successfully!"
+        );
+    }
+
+    @Override
+    public Result delete(int id) {
+        this.cityDao.deleteById(id);
+        return new SuccessResult("City deleted successfully!");
     }
 }
