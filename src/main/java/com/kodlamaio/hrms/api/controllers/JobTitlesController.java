@@ -54,7 +54,7 @@ public class JobTitlesController {
 
     @DeleteMapping("{id}")
     @ApiOperation(value = "Delete Job Title by Id")
-    public Result delete(int id) {
+    public Result delete(@PathVariable("id") int id) {
         return this.jobTitleService.delete(id);
     }
 }

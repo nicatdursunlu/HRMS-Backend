@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/languages")
@@ -49,5 +50,18 @@ public class LanguagesController {
         }
 
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @PutMapping("{id}")
+    @ApiOperation(value = "Update Language by Id")
+    public DataResult<Optional<Language>> update(
+            @PathVariable("id") int id, @Valid @RequestBody Language language) {
+        return this.languageService.update(id, language);
+    }
+
+    @DeleteMapping("{id}")
+    @ApiOperation(value = "Delete Language by Id")
+    public Result delete(@PathVariable("id") int id) {
+        return this.languageService.delete(id);
     }
 }

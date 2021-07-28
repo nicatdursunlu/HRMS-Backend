@@ -1,16 +1,14 @@
 package com.kodlamaio.hrms.business.concretes;
 
 import com.kodlamaio.hrms.business.abstracts.LanguageService;
-import com.kodlamaio.hrms.core.utilities.results.DataResult;
-import com.kodlamaio.hrms.core.utilities.results.Result;
-import com.kodlamaio.hrms.core.utilities.results.SuccessDataResult;
-import com.kodlamaio.hrms.core.utilities.results.SuccessResult;
+import com.kodlamaio.hrms.core.utilities.results.*;
 import com.kodlamaio.hrms.dataAccess.abstracts.LanguageDao;
 import com.kodlamaio.hrms.entities.concretes.Language;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LanguageManager implements LanguageService {
@@ -39,5 +37,27 @@ public class LanguageManager implements LanguageService {
     public Result add(Language language) {
         this.languageDao.save(language);
         return new SuccessResult("Language added successfully");
+    }
+
+    @Override
+    public DataResult<Optional<Language>> update(int id, Language language) {
+        Language oldLanguage = this.languageDao.findById(id).orElse(null);
+
+        if (oldLanguage == null) {
+            return new ErrorDataResult<>("Language is not found");
+        }
+
+        oldLanguage.setName(language.getName());
+        this.languageDao.save(oldLanguage);
+
+        return new SuccessDataResult<Optional<Language>>(
+                this.languageDao.findById(id), "Language updated successfully!"
+        );
+    }
+
+    @Override
+    public Result delete(int id) {
+        this.languageDao.deleteById(id);
+        return new SuccessResult("Language deleted successfully!");
     }
 }
