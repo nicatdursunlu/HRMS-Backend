@@ -47,7 +47,7 @@ public class CitiesController {
         return this.cityService.getAll(page, size);
     }
 
-    @GetMapping("id/{id}")
+    @GetMapping("{id}")
     @ApiOperation(value = "Get City by Id")
     public DataResult<Optional<City>> getById(@PathVariable("id") int id) {
         return this.cityService.getById(id);
@@ -60,7 +60,7 @@ public class CitiesController {
     }
 
     @GetMapping("state/{stateId}")
-    @ApiOperation(value = "Get City by State Id")
+    @ApiOperation(value = "Get Cities by State Id")
     public @ResponseBody DataResult<List<City>> getByStateId(@PathVariable("stateId") int stateId) {
         return this.cityService.getByStateId(stateId);
     }
@@ -80,7 +80,7 @@ public class CitiesController {
 
     @DeleteMapping("{id}")
     @ApiOperation(value = "Delete City by Id")
-    public Result delete(int id) {
+    public Result delete(@PathVariable("id") int id) {
         return this.cityService.delete(id);
     }
 }

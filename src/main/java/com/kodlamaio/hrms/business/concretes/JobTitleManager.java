@@ -1,15 +1,13 @@
 package com.kodlamaio.hrms.business.concretes;
 
 import com.kodlamaio.hrms.business.abstracts.JobTitleService;
-import com.kodlamaio.hrms.core.utilities.results.DataResult;
-import com.kodlamaio.hrms.core.utilities.results.Result;
-import com.kodlamaio.hrms.core.utilities.results.SuccessDataResult;
-import com.kodlamaio.hrms.core.utilities.results.SuccessResult;
+import com.kodlamaio.hrms.core.utilities.results.*;
 import com.kodlamaio.hrms.dataAccess.abstracts.JobTitleDao;
 import com.kodlamaio.hrms.entities.concretes.JobTitle;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JobTitleManager implements JobTitleService {
@@ -31,5 +29,28 @@ public class JobTitleManager implements JobTitleService {
     public Result add(JobTitle jobTitle) {
         this.jobTitleDao.save(jobTitle);
         return new SuccessResult("Job title added successfully");
+    }
+
+    @Override
+    public DataResult<Optional<JobTitle>> update(int id, JobTitle jobTitle) {
+
+        JobTitle oldJobTitle = this.jobTitleDao.findById(id).orElse(null);
+
+        if (oldJobTitle == null) {
+            return new ErrorDataResult<>("Job Title is not found");
+        }
+
+        oldJobTitle.setTitle(jobTitle.getTitle());
+        this.jobTitleDao.save(oldJobTitle);
+
+        return new SuccessDataResult<Optional<JobTitle>>(
+                this.jobTitleDao.findById(id), "Job Title updated successfully!"
+        );
+    }
+
+    @Override
+    public Result delete(int id) {
+        this.jobTitleDao.deleteById(id);
+        return new SuccessResult("Job Title deleted successfully!");
     }
 }

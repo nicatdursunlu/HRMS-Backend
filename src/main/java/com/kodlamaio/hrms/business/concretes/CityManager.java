@@ -72,7 +72,9 @@ public class CityManager implements CityService {
 
         oldCity.setStateId(city.getStateId());
         oldCity.setName(city.getName());
+
         this.cityDao.save(oldCity);
+
         return new SuccessDataResult<Optional<City>>(
                 this.cityDao.findById(id), "City updated successfully!"
         );

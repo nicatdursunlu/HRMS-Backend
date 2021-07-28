@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/jobs/types")
@@ -42,5 +43,18 @@ public class JobTitlesController {
         }
 
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @PutMapping("{id}")
+    @ApiOperation(value = "Update Job Title by Id")
+    public DataResult<Optional<JobTitle>> update(
+            @PathVariable("id") int id, @Valid @RequestBody JobTitle jobTitle) {
+        return this.jobTitleService.update(id, jobTitle);
+    }
+
+    @DeleteMapping("{id}")
+    @ApiOperation(value = "Delete Job Title by Id")
+    public Result delete(int id) {
+        return this.jobTitleService.delete(id);
     }
 }
