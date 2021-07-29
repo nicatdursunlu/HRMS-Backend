@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -43,5 +44,18 @@ public class SkillsController {
         }
 
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @PutMapping("{id}")
+    @ApiOperation(value = "Update Skill by Id")
+    public DataResult<Optional<Skill>> update(
+            @PathVariable("id") int id, @Valid @RequestBody Skill skill) {
+        return this.skillService.update(id, skill);
+    }
+
+    @DeleteMapping("{id}")
+    @ApiOperation(value = "Delete Skill by Id")
+    public Result delete(@PathVariable("id") int id) {
+        return this.skillService.delete(id);
     }
 }

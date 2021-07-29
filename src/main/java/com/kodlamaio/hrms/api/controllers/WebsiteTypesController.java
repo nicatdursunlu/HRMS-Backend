@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -43,5 +44,18 @@ public class WebsiteTypesController {
         }
 
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @PutMapping("{id}")
+    @ApiOperation(value = "Update Website Type by Id")
+    public DataResult<Optional<WebsiteType>> update(
+            @PathVariable("id") int id, @Valid @RequestBody WebsiteType websiteType) {
+        return this.websiteTypeService.update(id, websiteType);
+    }
+
+    @DeleteMapping("{id}")
+    @ApiOperation(value = "Delete Website Type by Id")
+    public Result delete(@PathVariable("id") int id) {
+        return this.websiteTypeService.delete(id);
     }
 }
