@@ -29,6 +29,9 @@ public class ResumeDetailDto extends ResumeSummaryDto {
     @JsonProperty("languages")
     public List<ResumeLanguageDetailDto> resumeLanguages;
 
+    @JsonProperty("certificates")
+    public List<ResumeCertificateDetailDto> resumeCertificates;
+
     @JsonProperty("websites")
     public List<ResumeWebsiteDetailDto> resumeWebsites;
 

@@ -31,9 +31,9 @@ public class ResumeProjectManager implements ResumeProjectService {
 
     @Override
     public DataResult<List<ResumeProject>> getAllByResumeId(int id){
-        List<ResumeProject> result = this.resumeProjectDao.findAllByResumeId(id);
+        List<ResumeProject> resumeProjects = this.resumeProjectDao.findAllByResumeId(id);
         return new SuccessDataResult<List<ResumeProject>>(
-                result, "Resume Projects by resume ID are listed successfully!"
+                resumeProjects, "Resume Projects by resume ID are listed successfully!"
         );
     }
 
