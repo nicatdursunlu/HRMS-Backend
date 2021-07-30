@@ -25,7 +25,7 @@ public class ResumeEducationManager implements ResumeEducationService {
     public DataResult<List<ResumeEducation>> getAll() {
         return new SuccessDataResult<List<ResumeEducation>>(
                 this.resumeEducationDao.findAll(),
-                "Resume educations are listed successfully!"
+                "Resume Educations are listed successfully!"
         );
     }
 
@@ -33,7 +33,7 @@ public class ResumeEducationManager implements ResumeEducationService {
     public DataResult<List<ResumeEducation>> getAllByResumeId(int resumeId) {
         List<ResumeEducation> result = this.resumeEducationDao.findAllByResumeId(resumeId);
         return new SuccessDataResult<List<ResumeEducation>>(
-                result, "Resume educations by resume ID are listed successfully!"
+                result, "Resume Educations by resume ID are listed successfully!"
         );
     }
 
@@ -46,7 +46,7 @@ public class ResumeEducationManager implements ResumeEducationService {
         }
 
         this.resumeEducationDao.save(resumeEducation);
-        return new SuccessResult("Resume education added successfully!");
+        return new SuccessResult("Resume Education added successfully!");
     }
 
     private Result checkIfIsGraduateThenGraduateDateNotNull(ResumeEducation resumeEducation) {

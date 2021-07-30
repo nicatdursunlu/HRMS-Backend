@@ -58,7 +58,7 @@ public class ResumeEducation {
     @Column(name = "graduate_date")
     private Date graduateDate;
 
-    //relation mapping.
+    // relation mapping.
     @ManyToOne(targetEntity = Resume.class, fetch = FetchType.LAZY)
     @JsonIgnore
     @JoinColumn(name = "resume_id", insertable = false, updatable = false)

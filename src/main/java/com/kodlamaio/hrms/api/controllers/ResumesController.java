@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -56,5 +57,18 @@ public class ResumesController {
         }
 
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @PutMapping("{id}")
+    @ApiOperation(value = "Update Resume by Id")
+    public DataResult<Optional<Resume>> update(
+            @PathVariable("id") int id, @Valid @RequestBody Resume resume) {
+        return this.resumeService.update(id, resume);
+    }
+
+    @DeleteMapping("{id}")
+    @ApiOperation(value = "Delete Resume by Id")
+    public Result delete(@PathVariable("id") int id) {
+        return this.resumeService.delete(id);
     }
 }

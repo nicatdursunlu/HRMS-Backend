@@ -35,7 +35,7 @@ public class ResumeEducationsController {
 
     @GetMapping("{resumeId}/educations")
     @ApiOperation(value = "Get All Resume Educations by Resume Id")
-    public DataResult<List<ResumeEducation>> getAllByResumeId(int resumeId) {
+    public DataResult<List<ResumeEducation>> getAllByResumeId(@PathVariable("resumeId") int resumeId) {
         return this.resumeEducationService.getAllByResumeId(resumeId);
     }
 
