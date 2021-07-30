@@ -2,6 +2,7 @@ package com.kodlamaio.hrms.api.controllers;
 
 import com.kodlamaio.hrms.business.abstracts.ResumeVolunteerService;
 import com.kodlamaio.hrms.core.utilities.results.DataResult;
+import com.kodlamaio.hrms.core.utilities.results.Result;
 import com.kodlamaio.hrms.entities.concretes.ResumeVolunteer;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -40,5 +42,18 @@ public class ResumeVolunteersController {
     @ApiOperation(value = "Add Resume Volunteers")
     public DataResult<ResumeVolunteer> add(@Valid @RequestBody ResumeVolunteer resumeVolunteer) {
         return this.resumeVolunteerService.add(resumeVolunteer);
+    }
+
+    @PutMapping("volunteers/{id}")
+    @ApiOperation(value = "Update Resume Volunteers by Resume Id")
+    public DataResult<Optional<ResumeVolunteer>> update(
+            @PathVariable("id") int id, @Valid @RequestBody ResumeVolunteer resumeVolunteer) {
+        return this.resumeVolunteerService.update(id, resumeVolunteer);
+    }
+
+    @DeleteMapping("volunteers/{id}")
+    @ApiOperation(value = "Delete Resume Volunteers by Resume Id")
+    public Result delete(@PathVariable("id") int id) {
+        return this.resumeVolunteerService.delete(id);
     }
 }

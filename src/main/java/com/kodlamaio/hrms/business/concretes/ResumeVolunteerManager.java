@@ -58,11 +58,29 @@ public class ResumeVolunteerManager implements ResumeVolunteerService {
 
     @Override
     public DataResult<Optional<ResumeVolunteer>> update(int id, ResumeVolunteer resumeVolunteer) {
-        return null;
+        ResumeVolunteer oldResumeVolunteer = this.resumeVolunteersDao.findById(id).orElse(null);
+
+        if(oldResumeVolunteer == null) {
+            return new ErrorDataResult<>("Resume Volunteer is not found");
+        }
+
+        oldResumeVolunteer.setOrganization(resumeVolunteer.getOrganization());
+        oldResumeVolunteer.setDescription(resumeVolunteer.getDescription());
+        oldResumeVolunteer.setStartDate(resumeVolunteer.getStartDate());
+        oldResumeVolunteer.setEndDate(resumeVolunteer.getEndDate());
+        oldResumeVolunteer.setResumeId(resumeVolunteer.getResumeId());
+        oldResumeVolunteer.setRole(resumeVolunteer.getRole());
+
+        this.resumeVolunteersDao.save(oldResumeVolunteer);
+
+        return new SuccessDataResult<Optional<ResumeVolunteer>>(
+                this.resumeVolunteersDao.findById(id), "Resume Volunteer updated successfully!"
+        );
     }
 
     @Override
     public Result delete(int id) {
-        return null;
+        this.resumeVolunteersDao.deleteById(id);
+        return new SuccessResult("Resume Volunteer deleted successfully!");
     }
 }
