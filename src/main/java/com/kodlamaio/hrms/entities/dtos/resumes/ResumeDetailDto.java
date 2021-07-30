@@ -23,8 +23,8 @@ public class ResumeDetailDto extends ResumeSummaryDto {
     @JsonProperty("skills")
     public List<ResumeSkillDetailDto> resumeSkills;
 
-    @JsonProperty("qualifications")
-    public List<ResumeQualificationDetailDto> resumeQualifications;
+    @JsonProperty("projects")
+    public List<ResumeProjectDetailDto> resumeProjects;
 
     @JsonProperty("languages")
     public List<ResumeLanguageDetailDto> resumeLanguages;
@@ -32,6 +32,6 @@ public class ResumeDetailDto extends ResumeSummaryDto {
     @JsonProperty("websites")
     public List<ResumeWebsiteDetailDto> resumeWebsites;
 
-    @JsonProperty("projects")
-    public List<ResumeProjectDetailDto> resumeProjects;
+    @JsonProperty("qualifications")
+    public List<ResumeQualificationDetailDto> resumeQualifications;
 }

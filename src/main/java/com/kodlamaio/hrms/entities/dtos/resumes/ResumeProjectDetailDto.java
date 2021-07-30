@@ -19,8 +19,8 @@ public class ResumeProjectDetailDto {
     @JsonFormat(pattern = "dd.MM.yyyy")
     private Date startDate;
 
-    private boolean isContinued;
-
     @JsonFormat(pattern = "dd.MM.yyyy")
     private Date endDate;
+
+    private boolean isContinued;
 }

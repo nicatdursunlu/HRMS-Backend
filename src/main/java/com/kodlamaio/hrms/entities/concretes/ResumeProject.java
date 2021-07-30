@@ -43,7 +43,7 @@ public class ResumeProject {
 
     @NotNull(message = ValidationMessages.NOT_BLANK)
     @Column(name = "is_continued")
-    private boolean isContinued;
+    private boolean continued;
 
     // relation mapping.
     @ManyToOne(targetEntity = Resume.class, fetch = FetchType.LAZY)
