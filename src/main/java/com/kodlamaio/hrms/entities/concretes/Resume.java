@@ -64,6 +64,10 @@ public class Resume extends BaseEntity {
     @OneToMany(mappedBy = "resume", cascade = CascadeType.ALL)
     private List<ResumeVolunteer> resumeVolunteers;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "resume", cascade = CascadeType.ALL)
+    private List<ResumeReference> resumeReferences;
+
     // relations
     @ManyToOne(targetEntity = Candidate.class, fetch = FetchType.LAZY)
     @JsonIgnore

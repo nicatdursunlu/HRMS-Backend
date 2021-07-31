@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "resume_ed")
+@Table(name = "resume_educations")
 @EqualsAndHashCode(callSuper = false)
 public class ResumeEducation {
 

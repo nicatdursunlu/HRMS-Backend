@@ -35,6 +35,9 @@ public class ResumeDetailDto extends ResumeSummaryDto {
     @JsonProperty("volunteers")
     public List<ResumeVolunteerDetailDto> resumeVolunteers;
 
+    @JsonProperty("references")
+    public List<ResumeReferenceDetailDto> resumeReferences;
+
     @JsonProperty("websites")
     public List<ResumeWebsiteDetailDto> resumeWebsites;
 
