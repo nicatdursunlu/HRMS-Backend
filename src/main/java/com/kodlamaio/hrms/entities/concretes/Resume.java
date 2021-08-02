@@ -30,10 +30,6 @@ public class Resume extends BaseEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "resume", cascade = CascadeType.ALL)
-    private List<ResumeQualification> resumeQualifications;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "resume", cascade = CascadeType.ALL)
     private List<ResumeLanguage> resumeLanguages;
 
     @JsonIgnore
