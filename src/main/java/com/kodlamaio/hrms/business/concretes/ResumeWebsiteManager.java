@@ -7,6 +7,7 @@ import com.kodlamaio.hrms.core.utilities.results.Result;
 import com.kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import com.kodlamaio.hrms.core.utilities.results.SuccessResult;
 import com.kodlamaio.hrms.dataAccess.abstracts.ResumeWebsiteDao;
+import com.kodlamaio.hrms.entities.concretes.ResumeExperience;
 import com.kodlamaio.hrms.entities.concretes.ResumeWebsite;
 import com.kodlamaio.hrms.entities.dtos.resumes.ResumeWebsiteDetailDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,18 @@ public class ResumeWebsiteManager implements ResumeWebsiteService {
         this.resumeWebsiteDao = resumeWebsiteDao;
     }
 
+    @Override
+    public DataResult<List<ResumeWebsite>> getAll() {
+        return new SuccessDataResult<List<ResumeWebsite>>(
+                this.resumeWebsiteDao.findAll(), "Resume Websites are listed successfully!"
+        );
+    }
 
     @Override
-    public DataResult<List<ResumeWebsite>> getAllByResumeId(int resumeId) {
+    public DataResult<List<ResumeWebsite>> getAllByResumeId(int id) {
         return new SuccessDataResult<List<ResumeWebsite>>(
-                (List<ResumeWebsite>) this.resumeWebsiteDao.findAllByResumeId(resumeId),
-                "Resume websites are listed successfully!"
+                 this.resumeWebsiteDao.findAllByResumeId(id),
+                "Resume Websites by resume ID are listed successfully!"
         );
     }
 
@@ -46,6 +53,6 @@ public class ResumeWebsiteManager implements ResumeWebsiteService {
     @Override
     public Result add(ResumeWebsite resumeWebsite) {
         this.resumeWebsiteDao.save(resumeWebsite);
-        return new SuccessResult("Resume qualification added successfully!");
+        return new SuccessResult("Resume Website added successfully!");
     }
 }

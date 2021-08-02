@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface ResumeWebsiteService {
 
+    DataResult<List<ResumeWebsite>> getAll();
+
     DataResult<List<ResumeWebsite>> getAllByResumeId(int resumeId);
 
     DataResult<List<ResumeWebsiteDetailDto>> getAllDetailDtoByResumeId(int resumeId);
