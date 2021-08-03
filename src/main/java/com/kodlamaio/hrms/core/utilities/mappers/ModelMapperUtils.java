@@ -18,7 +18,6 @@ public class ModelMapperUtils {
     }
 
     public static <T> Object toObject(Object source, Class<T> baseClass) {
-        return modelMapper.map(source,baseClass);
-
+        return modelMapper.map(source, baseClass);
     }
 }

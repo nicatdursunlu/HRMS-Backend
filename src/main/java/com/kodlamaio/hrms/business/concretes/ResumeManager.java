@@ -43,6 +43,7 @@ public class ResumeManager implements ResumeService {
         );
     }
 
+
     @Override
     public DataResult<Resume> getById(int id) {
         return new SuccessDataResult<Resume>(this.resumeDao.findById(id).orElse(null));

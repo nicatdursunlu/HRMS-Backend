@@ -35,4 +35,24 @@ public class Candidate extends User {
     @NotNull(message = ValidationMessages.NOT_BLANK)
     @Column(name = "birth_date")
     private java.sql.Date birthDate;
+
+    @NotBlank(message = ValidationMessages.NOT_BLANK)
+    @Column(name = "gender")
+    private String gender;
+
+    @Column(name = "linkedin")
+    private String linkedin;
+
+    @Column(name = "github")
+    private String github;
+
+    @Column(name = "website")
+    private String website;
+
+    @Column(name = "about")
+    private String about;
+
+    @Column(name = "hobby")
+    private String hobby;
+
 }

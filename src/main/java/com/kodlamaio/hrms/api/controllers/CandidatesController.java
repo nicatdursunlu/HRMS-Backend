@@ -4,6 +4,7 @@ import com.kodlamaio.hrms.business.abstracts.CandidateService;
 import com.kodlamaio.hrms.core.utilities.results.DataResult;
 import com.kodlamaio.hrms.core.utilities.results.Result;
 import com.kodlamaio.hrms.entities.concretes.Candidate;
+import com.kodlamaio.hrms.entities.dtos.CandidateDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,12 @@ public class CandidatesController {
     @ApiOperation(value = "Get All Candidates")
     public DataResult<List<Candidate>> getAll() {
         return this.candidateService.getAll();
+    }
+
+    @GetMapping("{id}")
+    @ApiOperation(value = "Get Candidate by Id")
+    public DataResult<Candidate> getCandidateDtoById(@PathVariable("id") int id) {
+        return this.candidateService.getCandidateDtoById(id);
     }
 
     @PostMapping("")

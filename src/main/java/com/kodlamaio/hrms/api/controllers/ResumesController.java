@@ -37,15 +37,11 @@ public class ResumesController {
     }
 
     @GetMapping("{id}")
-    @ApiOperation(value = "Get Resume Summary by Resume Id")
+    @ApiOperation(value = "Get Resume by Resume Id")
     public DataResult<List<ResumeDetailDto>> getDetailDtoById(
             @PathVariable(name = "id", required = true) int id) {
         return this.resumeService.getDetailDtoById(id);
     }
-
-//    public DataResult<Resume> getById(int id) {
-//
-//    }
 
     @PostMapping("")
     @ApiOperation(value = "Add Resume")

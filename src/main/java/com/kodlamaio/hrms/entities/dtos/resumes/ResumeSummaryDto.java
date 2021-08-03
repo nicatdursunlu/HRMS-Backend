@@ -13,6 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class ResumeSummaryDto {
 
+    @JsonProperty("id")
     private int resumeId;
 
     @JsonProperty("firstName")
